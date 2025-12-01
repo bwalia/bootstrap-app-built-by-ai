@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management Dashboard</title>
-
+    <title>Project Management - Bootstrap App</title>
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- DataTables CSS -->
-    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
     <!-- JIRA Theme CSS -->
     <link href="css/jira-theme.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    
+    <style>
+        .sidebar { min-height: 100vh; }
+        .main-content { padding: 20px; }
+        .card { box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); }
+    </style>
 </head>
 <body>
-    <!-- JIRA Header -->
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg jira-header">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="assets/logo-icon.svg" alt="WebAImpetus" height="32" class="me-2">
-                WebAImpetus
-            </a>
+            <a class="navbar-brand" href="index.html"><img src="assets/logo-icon.svg" alt="WebAImpetus" height="32" class="me-2">
+                WebAImpetus</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -71,7 +71,7 @@
                             </a>
                         </li>
                         <a class="nav-link" href="#" id="logoutBtn">
-                            <i class="fas fa-sign-out-alt"></i> <span data-i18n="nav.logout">Logout</span>
+                            <i class="fas fa-sign-out-alt"></i> Logout
                         </a>
                     </li>
                 </ul>
@@ -82,11 +82,11 @@
     <!-- Main Content -->
     <div class="container-fluid">
         <div class="row">
-            <!-- JIRA Sidebar -->
+            <!-- Sidebar -->
             <nav id="sidebar" class="col-md-3 col-lg-2 jira-sidebar">
                 <div class="position-sticky pt-3">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -102,11 +102,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link active" href="index.html">
-                                    <i class="fas fa-tachometer-alt"></i> Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -122,11 +122,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="users.html">
-                                    <i class="fas fa-users"></i> Users
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="users.html">
+                                <i class="fas fa-users"></i> Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -142,11 +142,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="groups.html">
-                                    <i class="fas fa-layer-group"></i> Groups
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="groups.html">
+                                <i class="fas fa-layer-group"></i> Groups
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -162,11 +162,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="roles.html">
-                                    <i class="fas fa-user-tag"></i> Roles
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="roles.html">
+                                <i class="fas fa-user-tag"></i> Roles
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -182,11 +182,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="departments.html">
-                                    <i class="fas fa-building"></i> Departments
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="departments.html">
+                                <i class="fas fa-building"></i> Departments
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -202,11 +202,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="permissions.html">
-                                    <i class="fas fa-key"></i> Permissions
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="permissions.html">
+                                <i class="fas fa-key"></i> Permissions
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -222,11 +222,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="workspaces.html">
-                                    <i class="fas fa-building"></i> Workspaces
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="workspaces.html">
+                                <i class="fas fa-building"></i> Workspaces
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -242,11 +242,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="contacts.html">
-                                    <i class="fas fa-address-book"></i> Contacts
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="contacts.html">
+                                <i class="fas fa-address-book"></i> Contacts
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -262,11 +262,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="customers.html">
-                                    <i class="fas fa-users"></i> Customers
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="customers.html">
+                                <i class="fas fa-users"></i> Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -282,11 +282,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="enquiries.html">
-                                    <i class="fas fa-question-circle"></i> Enquiries
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="enquiries.html">
+                                <i class="fas fa-question-circle"></i> Enquiries
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -302,11 +302,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="projects.html">
-                                    <i class="fas fa-project-diagram"></i> Projects
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="projects.html" class="nav-link active">
+                                <i class="fas fa-project-diagram"></i> Projects
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -322,11 +322,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="jobs.html">
-                                    <i class="fas fa-tasks"></i> Jobs
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="jobs.html">
+                                <i class="fas fa-tasks"></i> Jobs
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -342,11 +342,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="tasks.html">
-                                    <i class="fas fa-list-check"></i> Tasks
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="tasks.html">
+                                <i class="fas fa-list-check"></i> Tasks
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -362,11 +362,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="timesheets.html">
-                                    <i class="fas fa-clock"></i> Timesheets
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="timesheets.html">
+                                <i class="fas fa-clock"></i> Timesheets
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -382,60 +382,47 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="documents.html">
-                                    <i class="fas fa-file-alt"></i> Documents
-                                </a>
-                            </li>
-                        </ul>
+                            <a class="nav-link" href="documents.html">
+                                <i class="fas fa-file-alt"></i> Documents
+                            </a>
+                        </li>
+                    </ul>
+</ul>
                 </div>
             </nav>
 
-            <!-- Main Content Area -->
+            <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-10 jira-main-content">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2" data-i18n="users.title">Users Management</h1>
+                    <h1 class="h2">Project Management</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
-                        <button class="btn btn-jira-primary me-2" id="addUserBtn">
-                            <i class="fas fa-user-plus"></i> <span data-i18n="users.addUser">Add User</span>
-                        </button>
-                        <button class="btn btn-jira-secondary" id="refreshBtn">
-                            <i class="fas fa-sync-alt"></i> <span data-i18n="common.refresh">Refresh</span>
+                        <button type="button" class="btn btn-jira-primary" data-bs-toggle="modal" data-bs-target="#addProjectModal">
+                            <i class="fas fa-plus"></i> Add Project
                         </button>
                     </div>
                 </div>
 
-                <!-- Alert Container -->
-                <div id="alertContainer"></div>
-
-                <!-- Loading Spinner -->
-                <div id="loadingSpinner" class="text-center my-5" style="display: none;">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden" data-i18n="common.loading">Loading...</span>
-                    </div>
-                    <p class="mt-2" data-i18n="users.loadingUsers">Loading users data...</p>
-                </div>
-
-                <!-- Users Table -->
+                <!-- Projects Table -->
                 <div class="card">
-                    <div class="card-header">
-                        <i class="fas fa-table"></i> <span data-i18n="users.usersList">Users List</span>
-                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="usersTable" class="table table-striped table-bordered" style="width:100%">
+                            <table id="projectsTable" class="table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th data-i18n="common.id">ID</th>
-                                        <th data-i18n="common.name">Name</th>
-                                        <th data-i18n="common.email">Email</th>
-                                        <th data-i18n="users.role">Role</th>
-                                        <th data-i18n="common.status">Status</th>
-                                        <th data-i18n="common.createdAt">Created At</th>
-                                        <th data-i18n="common.actions">Actions</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                        <th>Priority</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Budget</th>
+                                        <th>Customer</th>
+                                        <th>Manager</th>
+                                        <th>Created</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                </tbody>
+                                <tbody></tbody>
                             </table>
                         </div>
                     </div>
@@ -444,122 +431,82 @@
         </div>
     </div>
 
-    <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
+    <!-- Add Project Modal -->
+    <div class="modal fade" id="addProjectModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="fas fa-lock"></i> <span data-i18n="login.title">Login Required</span>
-                    </h5>
+                    <h5 class="modal-title">Add Project</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="loginForm">
-                        <div class="mb-3">
-                            <label for="email" class="form-label" data-i18n="login.email">Email</label>
-                            <input type="email" class="form-control" id="email" value="administrative@admin.com" required>
+                    <form id="addProjectForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="projectName" class="form-label">Project Name</label>
+                                    <input type="text" class="form-control" id="projectName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="projectPriority" class="form-label">Priority</label>
+                                    <select class="form-select" id="projectPriority">
+                                        <option value="low">Low</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="high">High</option>
+                                        <option value="urgent">Urgent</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label" data-i18n="login.password">Password</label>
-                            <input type="password" class="form-control" id="password" value="Admin@123" required>
+                            <label for="projectDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="projectDescription" rows="3" required></textarea>
                         </div>
-                        <div id="loginError" class="alert alert-danger" style="display: none;"></div>
-                        <button type="submit" class="btn btn-primary w-100" id="loginBtn">
-                            <i class="fas fa-sign-in-alt"></i> <span data-i18n="login.loginButton">Login</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- User Editor Modal -->
-    <div class="modal fade" id="userEditorModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="userEditorModalLabel">
-                        <i class="fas fa-user-edit"></i> <span id="modalTitle" data-i18n="users.addUser">Add User</span>
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="userEditorForm">
-                        <input type="hidden" id="userId">
-                        <div class="mb-3">
-                            <label for="userName" class="form-label"><span data-i18n="common.name">Name</span> <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="userName" required>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="projectStartDate" class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" id="projectStartDate">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="projectEndDate" class="form-label">End Date</label>
+                                    <input type="date" class="form-control" id="projectEndDate">
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="userEmail" class="form-label"><span data-i18n="common.email">Email</span> <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="userEmail" required>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="projectBudget" class="form-label">Budget</label>
+                                    <input type="number" class="form-control" id="projectBudget" min="0" step="0.01">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="projectCustomer" class="form-label">Customer</label>
+                                    <select class="form-select" id="projectCustomer">
+                                        <option value="">Select Customer (Optional)</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="userPassword" class="form-label"><span data-i18n="users.password">Password</span> <span class="text-danger" id="passwordRequired">*</span></label>
-                            <input type="password" class="form-control" id="userPassword">
-                            <small class="form-text text-muted" id="passwordHelp" data-i18n="users.passwordHelp">Leave blank to keep current password (when editing)</small>
-                        </div>
-                        <div class="mb-3">
-                            <label for="userRole" class="form-label" data-i18n="users.role">Role</label>
-                            <select class="form-control" id="userRole">
-                                <option value="User">User</option>
-                                <option value="Admin">Admin</option>
-                                <option value="Manager">Manager</option>
-                                <option value="Editor">Editor</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="userStatus" class="form-label" data-i18n="common.status">Status</label>
-                            <select class="form-control" id="userStatus">
-                                <option value="active" data-i18n="common.active">Active</option>
-                                <option value="inactive" data-i18n="common.inactive">Inactive</option>
-                            </select>
-                        </div>
-                        <div id="userEditorError" class="alert alert-danger" style="display: none;"></div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="common.cancel">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="saveUserBtn">
-                        <i class="fas fa-save"></i> <span data-i18n="common.save">Save</span>
-                    </button>
+                    <button type="button" class="btn btn-jira-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-jira-primary" onclick="addProject()">Add Project</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Delete Confirmation Modal -->
-    <div class="modal fade" id="deleteConfirmModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">
-                        <i class="fas fa-exclamation-triangle"></i> <span data-i18n="msg.confirmDelete">Confirm Delete</span>
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p data-i18n="users.confirmDelete">Are you sure you want to delete this user?</p>
-                    <p><strong id="deleteUserName"></strong></p>
-                    <p class="text-muted" data-i18n="users.deleteWarning">This action cannot be undone.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="common.cancel">Cancel</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
-                        <i class="fas fa-trash"></i> <span data-i18n="users.deleteUser">Delete User</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
@@ -568,7 +515,7 @@
     <script src="js/auth.js"></script>
     <script src="js/api.js"></script>
     <script src="js/workspace.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/projects.js"></script>
     <script src="js/ui-controls.js"></script>
     <script src="js/dark-mode.js"></script>
 </body>

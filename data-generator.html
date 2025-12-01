@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Data Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .console-output {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 500px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .console-output .log-info { color: #4ec9b0; }
+        .console-output .log-success { color: #6a9955; }
+        .console-output .log-error { color: #f48771; }
+        .console-output .log-warning { color: #dcdcaa; }
+        .stat-card {
+            border-left: 4px solid;
+            transition: transform 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+        .stat-card.users { border-color: #0d6efd; }
+        .stat-card.groups { border-color: #198754; }
+        .stat-card.roles { border-color: #ffc107; }
+        .progress-section {
+            display: none;
+        }
+        .progress-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg jira-header">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <li class="nav-item">
+                            <a class="nav-link" href="kanban.html">
+                                <i class="fas fa-columns"></i> Kanban Board
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="scrum.html">
+                                <i class="fas fa-sprint"></i> Scrum Board
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="scheduler.html">
+                                <i class="fas fa-calendar-alt"></i> Job Scheduler
+                            </a>
+                        </li>
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-arrow-left"></i> Back to Dashboard
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1><i class="fas fa-database"></i> Test Data Generator</h1>
+                <p class="text-muted">Generate dummy users, groups, and roles for testing role-based access control</p>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card stat-card users">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-users"></i> Users</h5>
+                        <h2 class="mb-0" id="userCount">0</h2>
+                        <small class="text-muted">Generated</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card stat-card groups">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-users-cog"></i> Groups</h5>
+                        <h2 class="mb-0" id="groupCount">0</h2>
+                        <small class="text-muted">Generated</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card stat-card roles">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-user-shield"></i> Roles</h5>
+                        <h2 class="mb-0" id="roleCount">0</h2>
+                        <small class="text-muted">Generated</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-cog"></i> Generation Settings</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="userCountInput" class="form-label">Number of Users</label>
+                                <input type="number" class="form-control" id="userCountInput" value="300" min="1" max="1000">
+                                <small class="text-muted">Recommended: 100-500</small>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="groupCountInput" class="form-label">Number of Groups</label>
+                                <input type="number" class="form-control" id="groupCountInput" value="30" min="1" max="100">
+                                <small class="text-muted">Recommended: 20-50</small>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mb-3">
+                            <i class="fas fa-info-circle"></i> <strong>Note:</strong> 7 predefined roles will be created automatically
+                            (Super Admin, Admin, Manager, Editor, Viewer, Contributor, Guest)
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <button class="btn btn-jira-primary btn-lg" id="generateBtn" onclick="startGeneration()">
+                                <i class="fas fa-magic"></i> Generate Test Data
+                            </button>
+                            <button class="btn btn-outline-secondary btn-lg" id="quickGenBtn" onclick="quickGenerate()">
+                                <i class="fas fa-bolt"></i> Quick (50 users, 10 groups)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-danger text-white">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-exclamation-triangle"></i> Danger Zone</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Delete all generated test data</p>
+                        <button class="btn btn-light w-100" onclick="clearAllData()">
+                            <i class="fas fa-trash"></i> Clear All Data
+                        </button>
+                        <small class="d-block mt-2">⚠️ This cannot be undone!</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card progress-section" id="progressSection">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-tasks"></i> Generation Progress</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Overall Progress</label>
+                            <div class="progress" style="height: 25px;">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                     id="overallProgress"
+                                     role="progressbar"
+                                     style="width: 0%">0%</div>
+                            </div>
+                        </div>
+                        <div id="statusText" class="alert alert-info">
+                            <i class="fas fa-spinner fa-spin"></i> Initializing...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Console Output -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="fas fa-terminal"></i> Console Output</h5>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="clearConsole()">
+                            <i class="fas fa-eraser"></i> Clear
+                        </button>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="console-output" id="consoleOutput">
+                            Ready to generate test data...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/data-generator-v2.js"></script>
+
+    <script>
+        // Override console.log to display in UI
+        const originalLog = console.log;
+        const originalError = console.error;
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            appendToConsole(args.join(' '), 'info');
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            appendToConsole(args.join(' '), 'error');
+        };
+
+        function appendToConsole(message, type = 'info') {
+            const consoleOutput = document.getElementById('consoleOutput');
+            const timestamp = new Date().toLocaleTimeString();
+            const className = `log-${type}`;
+            consoleOutput.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        function clearConsole() {
+            document.getElementById('consoleOutput').innerHTML = 'Console cleared.\n';
+        }
+
+        function updateProgress(percent, status) {
+            const progressBar = document.getElementById('overallProgress');
+            const statusText = document.getElementById('statusText');
+            const progressSection = document.getElementById('progressSection');
+
+            progressSection.classList.add('active');
+            progressBar.style.width = percent + '%';
+            progressBar.textContent = Math.round(percent) + '%';
+            statusText.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${status}`;
+
+            if (percent >= 100) {
+                statusText.innerHTML = `<i class="fas fa-check-circle"></i> ${status}`;
+                statusText.className = 'alert alert-success';
+            }
+        }
+
+        function updateStats(users, groups, roles) {
+            document.getElementById('userCount').textContent = users;
+            document.getElementById('groupCount').textContent = groups;
+            document.getElementById('roleCount').textContent = roles;
+        }
+
+        async function startGeneration() {
+            const userCount = parseInt(document.getElementById('userCountInput').value);
+            const groupCount = parseInt(document.getElementById('groupCountInput').value);
+            const generateBtn = document.getElementById('generateBtn');
+
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+            clearConsole();
+            console.log('🚀 Starting data generation...');
+
+            updateProgress(0, 'Starting...');
+
+            try {
+                updateProgress(10, 'Generating roles...');
+                const results = await DataGeneratorV2.generateAll(userCount, groupCount);
+
+                updateProgress(100, 'Complete! All data generated successfully.');
+                updateStats(results.users.length, results.groups.length, results.roles.length);
+
+                console.log('✓ Generation complete!');
+                console.log(`Total: ${results.users.length} users, ${results.groups.length} groups, ${results.roles.length} roles`);
+
+            } catch (error) {
+                console.error('✗ Generation failed:', error.message);
+                updateProgress(0, 'Generation failed!');
+                document.getElementById('statusText').className = 'alert alert-danger';
+            } finally {
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = '<i class="fas fa-magic"></i> Generate Test Data';
+            }
+        }
+
+        async function quickGenerate() {
+            document.getElementById('userCountInput').value = 50;
+            document.getElementById('groupCountInput').value = 10;
+            await startGeneration();
+        }
+
+        async function clearAllData() {
+            if (confirm('⚠️ WARNING: This will delete ALL users, groups, and roles. Continue?')) {
+                clearConsole();
+                console.log('🗑️ Starting data cleanup...');
+
+                try {
+                    const results = await DataGeneratorV2.clearAllData();
+                    updateStats(0, 0, 0);
+                    console.log('✓ Cleanup complete!');
+                } catch (error) {
+                    console.error('✗ Cleanup failed:', error.message);
+                }
+            }
+        }
+
+        // Check authentication on load
+        $(document).ready(function() {
+            if (!AuthService.isAuthenticated()) {
+                alert('Please login first!');
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+    <script src="js/dark-mode.js"></script>
+</body>
+</html>

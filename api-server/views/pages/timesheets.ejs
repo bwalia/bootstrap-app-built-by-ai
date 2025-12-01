@@ -1,0 +1,134 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Timesheets</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button class="btn btn-jira-primary" data-bs-toggle="modal" data-bs-target="#addTimesheetModal">
+                <i class="fas fa-plus"></i> Add Timesheet
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="jira-card">
+    <div class="jira-card-header">
+        <i class="fas fa-clock"></i> Timesheets List
+    </div>
+    <div class="jira-card-body">
+        <div class="table-responsive">
+            <table id="timesheetsTable" class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Project</th>
+                        <th>Date</th>
+                        <th>Hours</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Add Timesheet Modal -->
+<div class="modal fade" id="addTimesheetModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Timesheet</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addTimesheetForm">
+                    <div class="mb-3">
+                        <label for="timesheetUser" class="form-label">User <span class="text-danger">*</span></label>
+                        <select class="form-select" id="timesheetUser" required>
+                            <option value="">Select User</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="timesheetProject" class="form-label">Project <span class="text-danger">*</span></label>
+                        <select class="form-select" id="timesheetProject" required>
+                            <option value="">Select Project</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="timesheetDate" class="form-label">Date <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" id="timesheetDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="timesheetHours" class="form-label">Hours <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" id="timesheetHours" min="0" max="24" step="0.5" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="timesheetDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="timesheetDescription" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-jira-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-jira-primary" onclick="addTimesheet()">Add Timesheet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Timesheet Modal -->
+<div class="modal fade" id="editTimesheetModal" tabindex="-1" aria-labelledby="editTimesheetModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editTimesheetModalLabel">Edit Timesheet</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editTimesheetForm">
+                    <input type="hidden" id="editTimesheetId">
+                    <div class="mb-3">
+                        <label for="editTimesheetUser" class="form-label">User <span class="text-danger">*</span></label>
+                        <select class="form-select" id="editTimesheetUser" required>
+                            <option value="">Select User</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTimesheetProject" class="form-label">Project <span class="text-danger">*</span></label>
+                        <select class="form-select" id="editTimesheetProject" required>
+                            <option value="">Select Project</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTimesheetDate" class="form-label">Date <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" id="editTimesheetDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTimesheetHours" class="form-label">Hours <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" id="editTimesheetHours" min="0" max="24" step="0.5" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTimesheetDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="editTimesheetDescription" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTimesheetStatus" class="form-label">Status</label>
+                        <select class="form-select" id="editTimesheetStatus">
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-jira-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-jira-primary" onclick="updateTimesheet()">Update Timesheet</button>
+            </div>
+        </div>
+    </div>
+</div>

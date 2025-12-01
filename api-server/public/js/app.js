@@ -1,20 +1,24 @@
 // Application Logic
-let dataTable;
-let loginModal;
+let appTable;
+let appLoginModal;
 let userEditorModal;
-let deleteConfirmModal;
+let appDeleteConfirmModal;
 let currentUserId = null;
 
 // Initialize app when DOM is ready
 $(document).ready(function() {
-    // Initialize Bootstrap modals
-    loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-    userEditorModal = new bootstrap.Modal(document.getElementById('userEditorModal'));
-    deleteConfirmModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+    // Only initialize modals if they exist on this page
+    const loginModalEl = document.getElementById('loginModal');
+    const userEditorModalEl = document.getElementById('userEditorModal');
+    const deleteConfirmModalEl = document.getElementById('deleteConfirmModal');
+    
+    if (loginModalEl) appLoginModal = new bootstrap.Modal(loginModalEl);
+    if (userEditorModalEl) userEditorModal = new bootstrap.Modal(userEditorModalEl);
+    if (deleteConfirmModalEl) appDeleteConfirmModal = new bootstrap.Modal(deleteConfirmModalEl);
 
     // Check if user is authenticated
     if (!AuthService.isAuthenticated()) {
-        loginModal.show();
+        if (appLoginModal) appLoginModal.show();
     } else {
         initializeDashboard();
     }
@@ -40,7 +44,7 @@ function setupEventListeners() {
 
         try {
             await AuthService.login(email, password);
-            loginModal.hide();
+            appLoginModal.hide();
             initializeDashboard();
         } catch (error) {
             loginError.text(error.message).show();
@@ -121,15 +125,15 @@ async function loadUsers() {
         }
 
         // Initialize or update DataTable
-        if (dataTable) {
-            dataTable.clear();
-            dataTable.rows.add(formatUsersData(users));
-            dataTable.draw();
+        if (appTable) {
+            appTable.clear();
+            appTable.rows.add(formatUsersData(users));
+            appTable.draw();
         } else {
             initializeDataTable(formatUsersData(users));
         }
 
-        showAlert('success', `Successfully loaded ${users.length} users`);
+        // Users loaded successfully
     } catch (error) {
         console.error('Error loading users:', error);
         showAlert('danger', `Error loading users: ${error.message}`);
@@ -192,7 +196,7 @@ function formatDate(dateString) {
 
 // Initialize DataTable
 function initializeDataTable(data) {
-    dataTable = $('#usersTable').DataTable({
+    appTable = $('#usersTable').DataTable({
         data: data,
         columns: [
             { title: "ID" },
@@ -342,7 +346,7 @@ async function saveUser() {
 function confirmDeleteUser(userId, userName) {
     currentUserId = userId;
     $('#deleteUserName').text(userName);
-    deleteConfirmModal.show();
+    appDeleteConfirmModal.show();
 }
 
 // Delete user
@@ -355,7 +359,7 @@ async function deleteUser() {
     try {
         await ApiService.deleteUser(currentUserId);
         showAlert('success', 'User deleted successfully');
-        deleteConfirmModal.hide();
+        appDeleteConfirmModal.hide();
         loadUsers();
     } catch (error) {
         console.error('Delete user error:', error);

@@ -29,6 +29,12 @@ const AuthService = {
                 const token = data.token || data.access_token;
                 this.setToken(token);
                 this.setUserData(data.user || { email: email });
+                
+                // Load workspaces after successful authentication
+                if (typeof WorkspaceService !== 'undefined') {
+                    WorkspaceService.loadWorkspacesAfterAuth();
+                }
+                
                 return data;
             } else {
                 throw new Error('No token received from server');
@@ -74,5 +80,7 @@ const AuthService = {
     logout() {
         localStorage.removeItem(this.TOKEN_KEY);
         localStorage.removeItem(this.USER_KEY);
+        // Redirect to login page
+        window.location.href = '/login.html';
     }
 };

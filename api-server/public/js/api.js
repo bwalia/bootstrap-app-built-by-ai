@@ -1,7 +1,7 @@
 // API Service
 const ApiService = {
     // API_URL: 'https://opsapi.workstation.co.uk',
-    API_URL: 'http://192.168.10.193:4010',
+    API_URL: 'https://dev007.webaimpetus.com',
 
     // Make authenticated request
     async request(endpoint, options = {}) {
@@ -22,7 +22,6 @@ const ApiService = {
             headers['Content-Type'] = 'application/json';
         }
 
-        console.log('Making API request to:', `${this.API_URL}${endpoint}`, 'with headers:', headers);
 
         try {
             const response = await fetch(`${this.API_URL}${endpoint}`, {
@@ -30,7 +29,6 @@ const ApiService = {
                 headers
             });
 
-            console.log('API response status:', response.status, 'for endpoint:', endpoint);
 
             // Check if unauthorized
             if (response.status === 401) {
@@ -64,7 +62,6 @@ const ApiService = {
             }
 
             const result = await response.json();
-            console.log('API request successful, result length:', Array.isArray(result) ? result.length : 'not array');
             return result;
         } catch (error) {
             console.error('API request error:', error);
@@ -73,8 +70,9 @@ const ApiService = {
     },
 
     // Get all users
-    async getUsers() {
-        return await this.request('/api/v2/users');
+    async getUsers(workspaceId = null) {
+        const url = workspaceId ? `/api/v2/users?workspace_id=${workspaceId}` : '/api/v2/users';
+        return await this.request(url);
     },
 
     // Get a single user by ID
@@ -637,10 +635,8 @@ const ApiService = {
     // TIMESHEETS
     async getTimesheets(workspaceId = null) {
         const url = workspaceId ? `/api/v2/timesheets?workspace_id=${workspaceId}` : '/api/v2/timesheets';
-        console.log('ApiService.getTimesheets called with workspaceId:', workspaceId, 'URL:', url);
         try {
             const result = await this.request(url);
-            console.log('ApiService.getTimesheets result:', result.length, 'timesheets');
             return result;
         } catch (error) {
             console.error('ApiService.getTimesheets error:', error);
@@ -698,11 +694,7 @@ const ApiService = {
         return await this.request(url);
     },
 
-    async uploadDocument(file, description = '', workspaceId = null) {
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('description', description);
-
+    async uploadDocument(formData, workspaceId = null) {
         const headers = {};
         if (workspaceId) {
             headers['X-Workspace-Id'] = workspaceId;
@@ -712,6 +704,39 @@ const ApiService = {
             method: 'POST',
             body: formData,
             headers
+        });
+    },
+
+    async downloadDocument(documentId, workspaceId = null) {
+        const url = workspaceId ? 
+            `${this.API_URL}/api/v2/documents/${documentId}/download?workspace_id=${workspaceId}` :
+            `${this.API_URL}/api/v2/documents/${documentId}/download`;
+        
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: this.getHeaders()
+        });
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to download document');
+        }
+        
+        const blob = await response.blob();
+        const filename = response.headers.get('Content-Disposition')?.split('filename=')[1]?.replace(/"/g, '') || 'document';
+        
+        return { data: blob, filename };
+    },
+
+    async updateDocument(documentId, documentData, workspaceId = null) {
+        const headers = workspaceId ? { 'X-Workspace-Id': workspaceId } : {};
+        return await this.request(`/api/v2/documents/${documentId}`, {
+            method: 'PUT',
+            body: JSON.stringify(documentData),
+            headers: {
+                ...headers,
+                'Content-Type': 'application/json'
+            }
         });
     },
 

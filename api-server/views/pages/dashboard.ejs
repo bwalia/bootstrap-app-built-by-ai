@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button class="btn btn-jira-primary" id="refreshBtn">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="jira-card">
+            <div class="jira-card-header">
+                <i class="fas fa-users"></i> Total Users
+            </div>
+            <div class="jira-card-body">
+                <h3 id="totalUsers">0</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="jira-card">
+            <div class="jira-card-header">
+                <i class="fas fa-project-diagram"></i> Active Projects
+            </div>
+            <div class="jira-card-body">
+                <h3 id="activeProjects">0</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="jira-card">
+            <div class="jira-card-header">
+                <i class="fas fa-tasks"></i> Pending Tasks
+            </div>
+            <div class="jira-card-body">
+                <h3 id="pendingTasks">0</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="jira-card">
+            <div class="jira-card-header">
+                <i class="fas fa-clock"></i> Hours This Week
+            </div>
+            <div class="jira-card-body">
+                <h3 id="weeklyHours">0</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8">
+        <div class="jira-card">
+            <div class="jira-card-header">
+                <i class="fas fa-chart-line"></i> Recent Activity
+            </div>
+            <div class="jira-card-body">
+                <div id="recentActivity">
+                    <p class="text-muted">Loading recent activity...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="jira-card">
+            <div class="jira-card-header">
+                <i class="fas fa-bell"></i> Notifications
+            </div>
+            <div class="jira-card-body">
+                <div id="notifications">
+                    <p class="text-muted">No new notifications</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Endpoint Tester</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .result-success { color: green; }
+        .result-error { color: red; }
+        .result-info { color: blue; }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1><i class="fas fa-vial"></i> API Endpoint Tester</h1>
+        <p class="text-muted">Test API endpoints to discover what's available on your server</p>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Authentication</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="apiUrl" class="form-label">API URL</label>
+                    <input type="text" class="form-control" id="apiUrl" value="http://localhost:4010">
+                </div>
+                <div class="mb-3">
+                    <label for="token" class="form-label">Bearer Token (leave empty to get from localStorage)</label>
+                    <textarea class="form-control" id="token" rows="3"></textarea>
+                </div>
+                <button class="btn btn-jira-primary" onclick="loadTokenFromStorage()">
+                    <i class="fas fa-download"></i> Load Token from Storage
+                </button>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Test Endpoints</h5>
+            </div>
+            <div class="card-body">
+                <div class="btn-group mb-3" role="group">
+                    <button class="btn btn-outline-primary" onclick="testEndpoints('users')">Test Users</button>
+                    <button class="btn btn-outline-primary" onclick="testEndpoints('groups')">Test Groups</button>
+                    <button class="btn btn-outline-primary" onclick="testEndpoints('roles')">Test Roles</button>
+                    <button class="btn btn-outline-success" onclick="testAllEndpoints()">Test All</button>
+                </div>
+                <div class="mb-3">
+                    <label for="customEndpoint" class="form-label">Custom Endpoint</label>
+                    <input type="text" class="form-control" id="customEndpoint" placeholder="/custom/endpoint">
+                    <button class="btn btn-outline-secondary mt-2" onclick="testCustomEndpoint()">Test Custom Endpoint</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Results</h5>
+                <button class="btn btn-sm btn-outline-secondary float-end" onclick="clearResults()">Clear</button>
+            </div>
+            <div class="card-body">
+                <div id="results"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadTokenFromStorage() {
+            const token = localStorage.getItem('api_token');
+            if (token) {
+                document.getElementById('token').value = token;
+                addResult('success', 'Token loaded from localStorage');
+            } else {
+                addResult('error', 'No token found in localStorage. Please login first.');
+            }
+        }
+
+        function getToken() {
+            return document.getElementById('token').value.trim() || localStorage.getItem('api_token');
+        }
+
+        function getApiUrl() {
+            return document.getElementById('apiUrl').value.trim();
+        }
+
+        async function testEndpoint(endpoint) {
+            const apiUrl = getApiUrl();
+            const token = getToken();
+
+            if (!token) {
+                addResult('error', 'No token provided. Please add a token or load from storage.');
+                return null;
+            }
+
+            addResult('info', `Testing: ${endpoint}`);
+
+            try {
+                const response = await fetch(`${apiUrl}${endpoint}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                });
+
+                const status = response.status;
+                let data = null;
+                let text = await response.text();
+
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    data = text;
+                }
+
+                if (response.ok) {
+                    addResult('success', `✓ ${endpoint} - Status: ${status}`);
+                    addResult('info', `Response: <pre>${JSON.stringify(data, null, 2)}</pre>`);
+                    return { success: true, endpoint, status, data };
+                } else {
+                    addResult('error', `✗ ${endpoint} - Status: ${status}`);
+                    addResult('error', `Error: <pre>${JSON.stringify(data, null, 2)}</pre>`);
+                    return { success: false, endpoint, status, data };
+                }
+            } catch (error) {
+                addResult('error', `✗ ${endpoint} - Network Error: ${error.message}`);
+                return { success: false, endpoint, error: error.message };
+            }
+        }
+
+        async function testEndpoints(resource) {
+            const endpoints = [
+                `/${resource}`,
+                `/api/${resource}`,
+                `/${resource.slice(0, -1)}`, // singular
+                `/api/${resource.slice(0, -1)}` // singular with api prefix
+            ];
+
+            addResult('info', `<hr><strong>Testing ${resource} endpoints...</strong>`);
+
+            for (const endpoint of endpoints) {
+                await testEndpoint(endpoint);
+            }
+        }
+
+        async function testAllEndpoints() {
+            clearResults();
+            addResult('info', '<h5>Testing all endpoints...</h5>');
+            await testEndpoints('users');
+            await testEndpoints('groups');
+            await testEndpoints('roles');
+            addResult('success', '<hr><strong>All tests completed!</strong>');
+        }
+
+        async function testCustomEndpoint() {
+            const endpoint = document.getElementById('customEndpoint').value.trim();
+            if (!endpoint) {
+                addResult('error', 'Please enter a custom endpoint');
+                return;
+            }
+            await testEndpoint(endpoint);
+        }
+
+        function addResult(type, message) {
+            const results = document.getElementById('results');
+            const className = `result-${type}`;
+            results.innerHTML += `<div class="${className}">${message}</div>`;
+            results.scrollTop = results.scrollHeight;
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+
+        // Auto-load token on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('api_token');
+            if (token) {
+                document.getElementById('token').value = token;
+                addResult('info', 'Token auto-loaded from localStorage');
+            } else {
+                addResult('info', 'No token in localStorage. Please login first or paste your token above.');
+            }
+        });
+    </script>
+</body>
+</html>

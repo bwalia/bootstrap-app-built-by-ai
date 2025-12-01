@@ -1,6 +1,61 @@
 /* Custom Styles */
+:root {
+    --base-font-size: 14px;
+    /* Light mode colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-sidebar: #ffffff;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: rgba(0, 0, 0, .1);
+    --card-shadow: rgba(0, 0, 0, 0.075);
+    --sidebar-hover: #e9ecef;
+    --sidebar-active-bg: #e7f1ff;
+    --sidebar-active-text: #0d6efd;
+    --table-header-bg: #f8f9fa;
+}
+
+/* Dark mode colors */
+body.dark-mode {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-sidebar: #212529;
+    --text-primary: #e9ecef;
+    --text-secondary: #adb5bd;
+    --border-color: rgba(255, 255, 255, .1);
+    --card-shadow: rgba(0, 0, 0, 0.3);
+    --sidebar-hover: #343a40;
+    --sidebar-active-bg: #1d3557;
+    --sidebar-active-text: #58a6ff;
+    --table-header-bg: #2d2d2d;
+}
+
 body {
-    font-size: 0.875rem;
+    font-size: var(--base-font-size);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Font size classes */
+body.font-small {
+    --base-font-size: 12px;
+}
+
+body.font-medium {
+    --base-font-size: 14px;
+}
+
+body.font-large {
+    --base-font-size: 16px;
+}
+
+body.font-xlarge {
+    --base-font-size: 18px;
+}
+
+body.font-xxlarge {
+    --base-font-size: 20px;
 }
 
 .sidebar {
@@ -10,26 +65,31 @@ body {
     left: 0;
     z-index: 100;
     padding: 0;
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    background-color: var(--bg-sidebar);
+    box-shadow: inset -1px 0 0 var(--border-color);
+    transition: background-color 0.3s ease;
 }
 
 .sidebar .nav-link {
     font-weight: 500;
-    color: #333;
+    color: var(--text-primary);
     padding: 0.75rem 1rem;
+    font-size: calc(var(--base-font-size) * 1.15);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .sidebar .nav-link:hover {
-    background-color: #e9ecef;
+    background-color: var(--sidebar-hover);
 }
 
 .sidebar .nav-link.active {
-    color: #0d6efd;
-    background-color: #e7f1ff;
+    color: var(--sidebar-active-text);
+    background-color: var(--sidebar-active-bg);
 }
 
 .sidebar .nav-link i {
-    margin-right: 8px;
+    margin-right: 10px;
+    font-size: calc(var(--base-font-size) * 1.2);
 }
 
 main {
@@ -38,21 +98,64 @@ main {
 
 .card {
     margin-bottom: 20px;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    box-shadow: 0 0.125rem 0.25rem var(--card-shadow);
+    background-color: var(--bg-primary);
+    border-color: var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .card-header {
-    background-color: #f8f9fa;
+    background-color: var(--bg-secondary);
     font-weight: 600;
+    border-bottom-color: var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-#usersTable {
-    font-size: 0.875rem;
+#usersTable, #groupsTable, #rolesTable {
+    font-size: calc(var(--base-font-size) * 0.93);
+    color: var(--text-primary);
 }
 
-#usersTable thead th {
-    background-color: #f8f9fa;
+#usersTable thead th,
+#groupsTable thead th,
+#rolesTable thead th {
+    background-color: var(--table-header-bg);
     font-weight: 600;
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* DataTables dark mode support */
+body.dark-mode .dataTables_wrapper .dataTables_length,
+body.dark-mode .dataTables_wrapper .dataTables_filter,
+body.dark-mode .dataTables_wrapper .dataTables_info,
+body.dark-mode .dataTables_wrapper .dataTables_paginate {
+    color: var(--text-primary);
+}
+
+body.dark-mode table.dataTable tbody tr {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+body.dark-mode table.dataTable tbody tr:hover {
+    background-color: var(--sidebar-hover);
+}
+
+body.dark-mode table.dataTable.stripe tbody tr.odd,
+body.dark-mode table.dataTable.display tbody tr.odd {
+    background-color: var(--bg-secondary);
+}
+
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: var(--text-primary) !important;
+}
+
+body.dark-mode .dataTables_wrapper .dataTables_filter input,
+body.dark-mode .dataTables_wrapper .dataTables_length select {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
 }
 
 .badge {
@@ -63,6 +166,73 @@ main {
     margin-right: 8px;
 }
 
+/* Font and Language Controls */
+.controls-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.font-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.font-controls .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.language-selector {
+    min-width: 120px;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    cursor: pointer;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    background-color: var(--sidebar-hover);
+}
+
+/* Modal dark mode support */
+body.dark-mode .modal-content {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--sidebar-active-text);
+}
+
+body.dark-mode .btn-close {
+    filter: invert(1);
+}
+
 @media (max-width: 767.98px) {
     .sidebar {
         position: relative;
@@ -71,5 +241,10 @@ main {
 
     main {
         margin-top: 0;
+    }
+
+    .controls-container {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }

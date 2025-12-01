@@ -1,0 +1,127 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Scrum Board</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button class="btn btn-jira-primary" data-bs-toggle="modal" data-bs-target="#addSprintModal">
+                <i class="fas fa-plus"></i> Add Sprint
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="scrum-board">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="scrum-column">
+                <div class="scrum-header">
+                    <h6>Product Backlog</h6>
+                    <span class="badge bg-secondary" id="backlog-count">0</span>
+                </div>
+                <div class="scrum-body" id="backlog-column">
+                    <!-- Stories will be loaded here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="scrum-column">
+                <div class="scrum-header">
+                    <h6>Sprint Backlog</h6>
+                    <span class="badge bg-primary" id="sprint-count">0</span>
+                </div>
+                <div class="scrum-body" id="sprint-column">
+                    <!-- Stories will be loaded here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="scrum-column">
+                <div class="scrum-header">
+                    <h6>In Progress</h6>
+                    <span class="badge bg-warning" id="inprogress-count">0</span>
+                </div>
+                <div class="scrum-body" id="inprogress-column">
+                    <!-- Stories will be loaded here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="scrum-column">
+                <div class="scrum-header">
+                    <h6>Testing</h6>
+                    <span class="badge bg-info" id="testing-count">0</span>
+                </div>
+                <div class="scrum-body" id="testing-column">
+                    <!-- Stories will be loaded here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="scrum-column">
+                <div class="scrum-header">
+                    <h6>Done</h6>
+                    <span class="badge bg-success" id="done-count">0</span>
+                </div>
+                <div class="scrum-body" id="done-column">
+                    <!-- Stories will be loaded here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="scrum-column">
+                <div class="scrum-header">
+                    <h6>Sprint Info</h6>
+                </div>
+                <div class="scrum-body">
+                    <div class="sprint-info">
+                        <p><strong>Current Sprint:</strong></p>
+                        <p id="current-sprint">Sprint 1</p>
+                        <p><strong>Story Points:</strong></p>
+                        <p id="story-points">0/0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Sprint Modal -->
+<div class="modal fade" id="addSprintModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Sprint</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addSprintForm">
+                    <div class="mb-3">
+                        <label for="sprintName" class="form-label">Sprint Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="sprintName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="sprintGoal" class="form-label">Sprint Goal</label>
+                        <textarea class="form-control" id="sprintGoal" rows="3"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="sprintStart" class="form-label">Start Date</label>
+                                <input type="date" class="form-control" id="sprintStart">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="sprintEnd" class="form-label">End Date</label>
+                                <input type="date" class="form-control" id="sprintEnd">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-jira-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-jira-primary" onclick="addSprint()">Add Sprint</button>
+            </div>
+        </div>
+    </div>
+</div>

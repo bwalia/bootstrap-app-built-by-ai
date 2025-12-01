@@ -3,39 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management Dashboard</title>
+    <title>Groups Management - Dashboard</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
+    <!-- JIRA Theme CSS -->
+    <link href="css/jira-theme.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="css/style.css">
-    <!-- JIRA Theme CSS -->
-    <link href="css/jira-theme.css" rel="stylesheet">
 </head>
 <body>
-    <!-- JIRA Header -->
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg jira-header">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="assets/logo-icon.svg" alt="WebAImpetus" height="32" class="me-2">
-                WebAImpetus
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item me-3">
-                        <select id="workspaceDropdown" class="form-select form-select-sm" style="width: auto;">
-                            <option value="1">Default Workspace</option>
-                        </select>
-                    </li>
                     <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
@@ -71,7 +65,7 @@
                             </a>
                         </li>
                         <a class="nav-link" href="#" id="logoutBtn">
-                            <i class="fas fa-sign-out-alt"></i> <span data-i18n="nav.logout">Logout</span>
+                            <i class="fas fa-sign-out-alt"></i> Logout
                         </a>
                     </li>
                 </ul>
@@ -82,11 +76,11 @@
     <!-- Main Content -->
     <div class="container-fluid">
         <div class="row">
-            <!-- JIRA Sidebar -->
+            <!-- Sidebar -->
             <nav id="sidebar" class="col-md-3 col-lg-2 jira-sidebar">
                 <div class="position-sticky pt-3">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -102,11 +96,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link active" href="index.html">
-                                    <i class="fas fa-tachometer-alt"></i> Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -122,11 +116,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="users.html">
-                                    <i class="fas fa-users"></i> Users
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="users.html">
+                                <i class="fas fa-users"></i> Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -142,11 +136,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="groups.html">
-                                    <i class="fas fa-layer-group"></i> Groups
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link active" href="groups.html">
+                                <i class="fas fa-layer-group"></i> Groups
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -162,11 +156,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="roles.html">
-                                    <i class="fas fa-user-tag"></i> Roles
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="roles.html">
+                                <i class="fas fa-user-tag"></i> Roles
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -182,11 +176,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="departments.html">
-                                    <i class="fas fa-building"></i> Departments
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="departments.html">
+                                <i class="fas fa-building"></i> Departments
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -202,11 +196,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="permissions.html">
-                                    <i class="fas fa-key"></i> Permissions
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="permissions.html">
+                                <i class="fas fa-key"></i> Permissions
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -222,11 +216,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="workspaces.html">
-                                    <i class="fas fa-building"></i> Workspaces
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="workspaces.html">
+                                <i class="fas fa-building"></i> Workspaces
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -242,11 +236,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="contacts.html">
-                                    <i class="fas fa-address-book"></i> Contacts
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="contacts.html">
+                                <i class="fas fa-address-book"></i> Contacts
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -262,11 +256,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="customers.html">
-                                    <i class="fas fa-users"></i> Customers
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="customers.html">
+                                <i class="fas fa-users"></i> Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -282,11 +276,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="enquiries.html">
-                                    <i class="fas fa-question-circle"></i> Enquiries
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="enquiries.html">
+                                <i class="fas fa-question-circle"></i> Enquiries
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -302,11 +296,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="projects.html">
-                                    <i class="fas fa-project-diagram"></i> Projects
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="projects.html">
+                                <i class="fas fa-project-diagram"></i> Projects
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -322,11 +316,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="jobs.html">
-                                    <i class="fas fa-tasks"></i> Jobs
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="jobs.html">
+                                <i class="fas fa-tasks"></i> Jobs
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -342,11 +336,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="tasks.html">
-                                    <i class="fas fa-list-check"></i> Tasks
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="tasks.html">
+                                <i class="fas fa-list-check"></i> Tasks
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -362,11 +356,11 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="timesheets.html">
-                                    <i class="fas fa-clock"></i> Timesheets
-                                </a>
-                            </li>
-                            <li class="nav-item">
+                            <a class="nav-link" href="timesheets.html">
+                                <i class="fas fa-clock"></i> Timesheets
+                            </a>
+                        </li>
+                        <li class="nav-item">
                         <li class="nav-item">
                             <a class="nav-link" href="kanban.html">
                                 <i class="fas fa-columns"></i> Kanban Board
@@ -382,24 +376,24 @@
                                 <i class="fas fa-calendar-alt"></i> Job Scheduler
                             </a>
                         </li>
-                                <a class="nav-link" href="documents.html">
-                                    <i class="fas fa-file-alt"></i> Documents
-                                </a>
-                            </li>
-                        </ul>
+                            <a class="nav-link" href="documents.html">
+                                <i class="fas fa-file-alt"></i> Documents
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
 
             <!-- Main Content Area -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 jira-main-content">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2" data-i18n="users.title">Users Management</h1>
+                    <h1 class="h2">Groups Management</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
-                        <button class="btn btn-jira-primary me-2" id="addUserBtn">
-                            <i class="fas fa-user-plus"></i> <span data-i18n="users.addUser">Add User</span>
+                        <button class="btn btn-success me-2" id="addGroupBtn">
+                            <i class="fas fa-plus"></i> Add Group
                         </button>
-                        <button class="btn btn-jira-secondary" id="refreshBtn">
-                            <i class="fas fa-sync-alt"></i> <span data-i18n="common.refresh">Refresh</span>
+                        <button class="btn btn-jira-primary" id="refreshBtn">
+                            <i class="fas fa-sync-alt"></i> Refresh
                         </button>
                     </div>
                 </div>
@@ -410,28 +404,27 @@
                 <!-- Loading Spinner -->
                 <div id="loadingSpinner" class="text-center my-5" style="display: none;">
                     <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden" data-i18n="common.loading">Loading...</span>
+                        <span class="visually-hidden">Loading...</span>
                     </div>
-                    <p class="mt-2" data-i18n="users.loadingUsers">Loading users data...</p>
+                    <p class="mt-2">Loading groups data...</p>
                 </div>
 
-                <!-- Users Table -->
+                <!-- Groups Table -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fas fa-table"></i> <span data-i18n="users.usersList">Users List</span>
+                        <i class="fas fa-table"></i> Groups List
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="usersTable" class="table table-striped table-bordered" style="width:100%">
+                            <table id="groupsTable" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th data-i18n="common.id">ID</th>
-                                        <th data-i18n="common.name">Name</th>
-                                        <th data-i18n="common.email">Email</th>
-                                        <th data-i18n="users.role">Role</th>
-                                        <th data-i18n="common.status">Status</th>
-                                        <th data-i18n="common.createdAt">Created At</th>
-                                        <th data-i18n="common.actions">Actions</th>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                        <th>Created At</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -450,22 +443,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <i class="fas fa-lock"></i> <span data-i18n="login.title">Login Required</span>
+                        <i class="fas fa-lock"></i> Login Required
                     </h5>
                 </div>
                 <div class="modal-body">
                     <form id="loginForm">
                         <div class="mb-3">
-                            <label for="email" class="form-label" data-i18n="login.email">Email</label>
+                            <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" value="administrative@admin.com" required>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label" data-i18n="login.password">Password</label>
+                            <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" value="Admin@123" required>
                         </div>
                         <div id="loginError" class="alert alert-danger" style="display: none;"></div>
-                        <button type="submit" class="btn btn-primary w-100" id="loginBtn">
-                            <i class="fas fa-sign-in-alt"></i> <span data-i18n="login.loginButton">Login</span>
+                        <button type="submit" class="btn btn-jira-primary w-100" id="loginBtn">
+                            <i class="fas fa-sign-in-alt"></i> Login
                         </button>
                     </form>
                 </div>
@@ -473,55 +466,41 @@
         </div>
     </div>
 
-    <!-- User Editor Modal -->
-    <div class="modal fade" id="userEditorModal" tabindex="-1">
+    <!-- Group Editor Modal -->
+    <div class="modal fade" id="groupEditorModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="userEditorModalLabel">
-                        <i class="fas fa-user-edit"></i> <span id="modalTitle" data-i18n="users.addUser">Add User</span>
+                    <h5 class="modal-title" id="groupEditorModalLabel">
+                        <i class="fas fa-users-cog"></i> <span id="modalTitle">Add Group</span>
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="userEditorForm">
-                        <input type="hidden" id="userId">
+                    <form id="groupEditorForm">
+                        <input type="hidden" id="groupId">
                         <div class="mb-3">
-                            <label for="userName" class="form-label"><span data-i18n="common.name">Name</span> <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="userName" required>
+                            <label for="groupName" class="form-label">Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="groupName" required>
                         </div>
                         <div class="mb-3">
-                            <label for="userEmail" class="form-label"><span data-i18n="common.email">Email</span> <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="userEmail" required>
+                            <label for="groupDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="groupDescription" rows="3"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="userPassword" class="form-label"><span data-i18n="users.password">Password</span> <span class="text-danger" id="passwordRequired">*</span></label>
-                            <input type="password" class="form-control" id="userPassword">
-                            <small class="form-text text-muted" id="passwordHelp" data-i18n="users.passwordHelp">Leave blank to keep current password (when editing)</small>
-                        </div>
-                        <div class="mb-3">
-                            <label for="userRole" class="form-label" data-i18n="users.role">Role</label>
-                            <select class="form-control" id="userRole">
-                                <option value="User">User</option>
-                                <option value="Admin">Admin</option>
-                                <option value="Manager">Manager</option>
-                                <option value="Editor">Editor</option>
+                            <label for="groupStatus" class="form-label">Status</label>
+                            <select class="form-control" id="groupStatus">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="userStatus" class="form-label" data-i18n="common.status">Status</label>
-                            <select class="form-control" id="userStatus">
-                                <option value="active" data-i18n="common.active">Active</option>
-                                <option value="inactive" data-i18n="common.inactive">Inactive</option>
-                            </select>
-                        </div>
-                        <div id="userEditorError" class="alert alert-danger" style="display: none;"></div>
+                        <div id="groupEditorError" class="alert alert-danger" style="display: none;"></div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="common.cancel">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="saveUserBtn">
-                        <i class="fas fa-save"></i> <span data-i18n="common.save">Save</span>
+                    <button type="button" class="btn btn-jira-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-jira-primary" id="saveGroupBtn">
+                        <i class="fas fa-save"></i> Save Group
                     </button>
                 </div>
             </div>
@@ -534,19 +513,19 @@
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
                     <h5 class="modal-title">
-                        <i class="fas fa-exclamation-triangle"></i> <span data-i18n="msg.confirmDelete">Confirm Delete</span>
+                        <i class="fas fa-exclamation-triangle"></i> Confirm Delete
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p data-i18n="users.confirmDelete">Are you sure you want to delete this user?</p>
-                    <p><strong id="deleteUserName"></strong></p>
-                    <p class="text-muted" data-i18n="users.deleteWarning">This action cannot be undone.</p>
+                    <p>Are you sure you want to delete this group?</p>
+                    <p><strong id="deleteGroupName"></strong></p>
+                    <p class="text-muted">This action cannot be undone.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="common.cancel">Cancel</button>
+                    <button type="button" class="btn btn-jira-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
-                        <i class="fas fa-trash"></i> <span data-i18n="users.deleteUser">Delete User</span>
+                        <i class="fas fa-trash"></i> Delete Group
                     </button>
                 </div>
             </div>
@@ -567,8 +546,7 @@
     <script src="js/i18n.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/api.js"></script>
-    <script src="js/workspace.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/groups.js"></script>
     <script src="js/ui-controls.js"></script>
     <script src="js/dark-mode.js"></script>
 </body>

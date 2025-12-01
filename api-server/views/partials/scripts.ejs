@@ -1,0 +1,45 @@
+<%# Additional page-specific scripts %>
+<script>
+    // Page-specific initialization
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Page loaded:', '<%= currentPage %>');
+        
+        // Initialize authentication UI
+        setupAuthUI();
+        
+        // Setup logout button
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                AuthService.logout();
+                window.location.href = '/login.html';
+            });
+        }
+        
+        // Initialize page-specific functionality here
+    });
+    
+    // Setup authentication UI
+    function setupAuthUI() {
+        const userEmail = document.getElementById('userEmail');
+        const logoutBtn = document.getElementById('logoutBtn');
+        
+        if (AuthService.isAuthenticated()) {
+            const user = AuthService.getCurrentUser();
+            if (user && userEmail) {
+                userEmail.textContent = user.email || 'User';
+            }
+            if (logoutBtn) {
+                logoutBtn.style.display = 'block';
+            }
+        } else {
+            if (userEmail) {
+                userEmail.textContent = 'Not logged in';
+            }
+            if (logoutBtn) {
+                logoutBtn.style.display = 'none';
+            }
+        }
+    }
+</script>

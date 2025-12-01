@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - WebAImpetus</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <!-- JIRA Theme CSS -->
+    <link href="/css/jira-theme.css" rel="stylesheet">
+    
+    <%- include('../partials/styles') %>
+</head>
+<body>
+    <!-- JIRA Header -->
+    <nav class="navbar navbar-expand-lg jira-header">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="/assets/logo-icon.svg" alt="WebAImpetus" height="32" class="me-2">
+                WebAImpetus
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item me-3">
+                        <select id="workspaceDropdown" class="form-select form-select-sm" style="width: auto;">
+                            <option value="1">Default Workspace</option>
+                        </select>
+                    </li>
+                    <li class="nav-item me-2">
+                        <button class="theme-toggle btn btn-sm" aria-label="Toggle theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="userEmail"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- JIRA Sidebar -->
+            <nav class="col-md-3 col-lg-2 jira-sidebar">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'dashboard' ? 'active' : '' %>" href="/">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'users' ? 'active' : '' %>" href="/users">
+                                <i class="fas fa-users"></i> Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'groups' ? 'active' : '' %>" href="/groups">
+                                <i class="fas fa-layer-group"></i> Groups
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'roles' ? 'active' : '' %>" href="/roles">
+                                <i class="fas fa-user-tag"></i> Roles
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'departments' ? 'active' : '' %>" href="/departments">
+                                <i class="fas fa-building"></i> Departments
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'permissions' ? 'active' : '' %>" href="/permissions">
+                                <i class="fas fa-key"></i> Permissions
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'workspaces' ? 'active' : '' %>" href="/workspaces">
+                                <i class="fas fa-building"></i> Workspaces
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'contacts' ? 'active' : '' %>" href="/contacts">
+                                <i class="fas fa-address-book"></i> Contacts
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'customers' ? 'active' : '' %>" href="/customers">
+                                <i class="fas fa-users"></i> Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'enquiries' ? 'active' : '' %>" href="/enquiries">
+                                <i class="fas fa-question-circle"></i> Enquiries
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'projects' ? 'active' : '' %>" href="/projects">
+                                <i class="fas fa-project-diagram"></i> Projects
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'jobs' ? 'active' : '' %>" href="/jobs">
+                                <i class="fas fa-tasks"></i> Jobs
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'tasks' ? 'active' : '' %>" href="/tasks">
+                                <i class="fas fa-list-check"></i> Tasks
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'kanban' ? 'active' : '' %>" href="/kanban">
+                                <i class="fas fa-columns"></i> Kanban Board
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'scrum' ? 'active' : '' %>" href="/scrum">
+                                <i class="fas fa-sprint"></i> Scrum Board
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'scheduler' ? 'active' : '' %>" href="/scheduler">
+                                <i class="fas fa-calendar-alt"></i> Job Scheduler
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'timesheets' ? 'active' : '' %>" href="/timesheets">
+                                <i class="fas fa-clock"></i> Timesheets
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'documents' ? 'active' : '' %>" href="/documents">
+                                <i class="fas fa-file-alt"></i> Documents
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <%= currentPage === 'data-viewer' ? 'active' : '' %>" href="/data-viewer">
+                                <i class="fas fa-database"></i> Data Viewer
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 jira-main-content">
+                <%- include('../pages/' + currentPage) %>
+            </main>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="/js/i18n.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/workspace.js"></script>
+    <script src="/js/ui-controls.js"></script>
+    <script src="/js/dark-mode.js"></script>
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/groups.js"></script>
+    <script src="/js/permissions.js"></script>
+    <script src="/js/workspaces.js"></script>
+    <script src="/js/contacts.js"></script>
+    <script src="/js/customers.js"></script>
+    <script src="/js/roles.js"></script>
+    <script src="/js/enquiries.js"></script>
+    <script src="/js/documents.js"></script>
+    <script src="/js/scrum.js"></script>
+    <script src="/js/kanban.js"></script>
+    <script src="/js/scheduler.js"></script>
+    <script src="/js/tasks.js"></script>
+    <script src="/js/projects.js"></script>
+    <script src="/js/jobs.js"></script>
+    <script src="/js/timesheets.js"></script>
+    <script src="/js/users.js"></script>
+    <script src="/js/departments.js"></script>
+    <script src="/js/data-viewer.js"></script>
+    
+    <!-- Initialize UI Controls -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof UIControls !== 'undefined') {
+                UIControls.init();
+            }
+        });
+    </script>
+    
+    <%- include('../partials/scripts') %>
+</body>
+</html>

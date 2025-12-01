@@ -1,0 +1,151 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Job Scheduler</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button class="btn btn-jira-primary" data-bs-toggle="modal" data-bs-target="#addJobModal">
+                <i class="fas fa-plus"></i> Add Job
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="scheduler-board">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="scheduler-panel">
+                <div class="scheduler-header">
+                    <h5>Available Resources</h5>
+                </div>
+                <div class="scheduler-body" id="resources-panel">
+                    <!-- Resources will be loaded here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="scheduler-panel">
+                <div class="scheduler-header">
+                    <h5>Job Assignments</h5>
+                </div>
+                <div class="scheduler-body">
+                    <div class="timeline-view" id="timeline-view">
+                        <!-- Timeline will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Job Modal -->
+<div class="modal fade" id="addJobModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Job</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addJobForm">
+                    <div class="mb-3">
+                        <label for="jobName" class="form-label">Job Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="jobName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="jobDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="jobDescription" rows="3"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="jobStart" class="form-label">Start Date</label>
+                                <input type="date" class="form-control" id="jobStart">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="jobEnd" class="form-label">End Date</label>
+                                <input type="date" class="form-control" id="jobEnd">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="jobPriority" class="form-label">Priority</label>
+                        <select class="form-select" id="jobPriority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="jobSkills" class="form-label">Required Skills</label>
+                        <input type="text" class="form-control" id="jobSkills" placeholder="JavaScript, React, Node.js">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-jira-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-jira-primary" onclick="addJob()">Add Job</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Job Modal -->
+<div class="modal fade" id="editJobModal" tabindex="-1" aria-labelledby="editJobModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editJobModalLabel">Edit Job</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editJobForm">
+                    <input type="hidden" id="editJobId">
+                    <div class="mb-3">
+                        <label for="editJobTitle" class="form-label">Job Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="editJobTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editJobDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="editJobDescription" rows="3"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editJobStartDate" class="form-label">Start Date</label>
+                                <input type="date" class="form-control" id="editJobStartDate">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="editJobEndDate" class="form-label">End Date</label>
+                                <input type="date" class="form-control" id="editJobEndDate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editJobPriority" class="form-label">Priority</label>
+                        <select class="form-select" id="editJobPriority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editJobStatus" class="form-label">Status</label>
+                        <select class="form-select" id="editJobStatus">
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-jira-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-jira-primary" onclick="updateScheduler()">Update Job</button>
+            </div>
+        </div>
+    </div>
+</div>
